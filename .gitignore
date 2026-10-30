@@ -1,0 +1,39 @@
+# Python environments
+.venv/
+.venv312/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+build/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# AI model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+*.h5
+
+# Large datasets and archives
+*.pbf
+*.zip
+*.parquet
+
+# Generated outputs
+runs/
+ai/outputs/
+data/raw/
+data/processed/
+
+# OS files
+.DS_Store

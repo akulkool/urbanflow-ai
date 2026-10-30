@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: urbanflow-postgis
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-urbanflow}
+      POSTGRES_USER: ${POSTGRES_USER:-urbanflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-urbanflow_dev}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - urbanflow_postgis_data:/var/lib/postgresql/data
+      - ./backend/db/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-urbanflow} -d $${POSTGRES_DB:-urbanflow}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  urbanflow_postgis_data:
+    name: urbanflow_postgis_data
